@@ -1,0 +1,25 @@
+# Entornos virtuales
+venv/
+ENV/
+env/
+.venv/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de editores
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# NOTA: No ignore el db.sqlite3 ni media/, porque se deben incluir para poder visualizar usuarios, las imagenes de las recetas
+# db.sqlite3
+# media/

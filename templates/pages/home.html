@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio - Delicior{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="bienvenida text-center py-5 bg-light">
+  <div class="container">
+    <h1 class="fw-bold mb-3">
+      Descubre sabores, comparte pasiones en
+      <span style="color: #ff6f00; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">Delicior</span>
+    </h1>
+    <p class="lead">Explora recetas caseras, guarda tus favoritas o publica tus propias creaciones culinarias.</p>
+  </div>
+</section>
+
+<section class="hero-section position-relative">
+  <div id="carouselRecetas" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    
+    <!-- Slides -->
+    <div class="carousel-inner">
+      {% for receta in recetas_top %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ receta.imagen.url }}" class="d-block w-100" style="object-fit: cover; height: 88vh;" alt="{{ receta.titulo }}">
+        <div class="overlay-caption d-flex justify-content-center align-items-center">
+          <div class="text-center text-white">
+            <div class="receta-destacada-label">Receta destacada</div> 
+            <h2 class="fw-bold display-4">{{ receta.titulo|capfirst }}</h2>
+            <a href="{% url 'recetas:detalle_receta' receta.slug %}" class="btn btn-receta btn-lg mt-3">Ver receta</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Controles -->
+    {% if recetas_top|length > 1 %}
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselRecetas" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselRecetas" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+    {% endif %}
+  </div>
+</section>
+
+<section class="bg-light text-center py-5">
+  <h3 class="fw-bold">¿Tienes una receta increíble?</h3>
+  <p>Únete a la comunidad y compártela con el mundo.</p>
+  <a href="{% url 'recetas:crear' %}" class="btn btn-compartir">📸 Comparte tu receta</a>
+</section>
+
+<section class="bg-light text-center py-5">
+  <h4 class="mb-3">🍽️ Inspírate con nuevos sabores</h4>
+  <p>Explora ideas frescas y encuentra tu próxima receta favorita.</p>
+  <a href="{% url 'recetas:lista' %}" class="btn btn-compartir">🍽️ Explorar recetas</a>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const carouselEl = document.querySelector('#carouselRecetas');
+    if (carouselEl) {
+      new bootstrap.Carousel(carouselEl, {
+        interval: 5000,
+        ride: 'carousel'
+      });
+    }
+  });
+</script>
+{% endblock %}

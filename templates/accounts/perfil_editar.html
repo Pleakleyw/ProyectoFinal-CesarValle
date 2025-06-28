@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Editar Perfil | Delicior{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 600px;">
+  <h2 class="mb-4 text-center">
+    <i class="fas fa-user-edit text-secondary me-2"></i>Editar Perfil
+  </h2>
+
+  <form method="post" novalidate class="card p-4 shadow-sm bg-white">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="id_first_name" class="form-label">Nombre</label>
+        <input type="text" name="first_name" id="id_first_name" value="{{ form.first_name.value }}" class="form-control" required autocomplete="given-name">
+    </div>
+
+    <div class="mb-3">
+        <label for="id_last_name" class="form-label">Apellido</label>
+        <input type="text" name="last_name" id="id_last_name" value="{{ form.last_name.value }}" class="form-control" required autocomplete="family-name">
+    </div>
+
+    <div class="mb-4">
+        <label for="id_email" class="form-label">Correo electrónico</label>
+        <input type="email" name="email" id="id_email" value="{{ form.email.value }}" class="form-control" required autocomplete="email">
+    </div>
+
+    <div class="text-end">
+        <a href="{% url 'accounts:perfil' %}" class="btn btn-outline-secondary me-2">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', function(event) {
+    const firstName = form.first_name.value.trim();
+    const lastName = form.last_name.value.trim();
+    const email = form.email.value.trim();
+
+    let errores = [];
+
+    if (!firstName) {
+      errores.push("El campo Nombre es obligatorio.");
+    }
+
+    if (!lastName) {
+      errores.push("El campo Apellido es obligatorio.");
+    }
+
+    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      errores.push("Ingresa un correo electrónico válido.");
+    }
+
+    if (errores.length > 0) {
+      event.preventDefault();
+      alert("Por favor corrige los siguientes errores:\n\n" + errores.join('\n'));
+      return false;
+    }
+  });
+});
+</script>
+{% endblock %}

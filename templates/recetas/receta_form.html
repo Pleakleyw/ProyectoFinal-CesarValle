@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ view.object.titulo|default:'Crear Receta' }} | Delicior{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <a href="{% url 'recetas:lista' %}" class="btn btn-secondary mb-3">← Volver</a>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="text-center mb-4">{{ view.object.titulo|default:'Crear Receta' }}</h2>
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          {{ form.titulo.label_tag }}
+          {{ form.titulo }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.ingredientes.label_tag }}
+          {{ form.ingredientes }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.preparacion.label_tag }}
+          {{ form.preparacion }}
+        </div>
+        
+        <div class="mb-3">
+          {{ form.presentacion.label_tag }}
+          {{ form.presentacion }}
+        </div>
+
+        {% if form.imagen.value %}
+          <div class="mb-3 text-center">
+            <label class="form-label">Imagen actual:</label><br>
+            <img src="{{ form.instance.imagen.url }}" class="img-thumbnail" style="max-height:560px; max-width:100%;">
+
+          </div>
+        {% endif %}
+
+        <div class="mb-3">
+          {{ form.imagen.label_tag }}
+          {{ form.imagen }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.categoria.label_tag }}
+          {{ form.categoria }}
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

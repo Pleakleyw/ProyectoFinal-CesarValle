@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ receta.titulo }} - Delicior{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card shadow-sm p-4 position-relative">
+
+    <!-- Botón volver -->
+    <a href="javascript:history.back()" class="btn btn-sm btn-outline-dark position-absolute top-0 start-0 m-3">
+      ← Volver
+    </a>
+
+    <h2 class="mb-3 text-center">{{ receta.titulo|title }}</h2>
+
+    <div class="row">
+      <div class="col-md-7">
+        <p><strong>Autor:</strong> {{ receta.autor.username }}</p>
+        <p><strong>Fecha:</strong> {{ receta.creado|date:"d M Y" }}</p>
+
+        <h5 class="mt-4">🧂 Ingredientes:</h5>
+        <ul>
+          {% for item in receta.ingredientes.splitlines %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <h5 class="mt-4">👨‍🍳 Preparación:</h5>
+        <ul>
+          {% for item in receta.preparacion.splitlines %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+        {% if receta.presentacion %}
+          <h5 class="mt-4">🎨 Presentación / Notas:</h5>
+          <div>{{ receta.presentacion|safe }}</div>
+        {% endif %}
+
+        {% if request.user == receta.autor %}
+        <div class="mt-4">
+          <a href="{% url 'recetas:editar' receta.slug %}" class="btn btn-sm btn-outline-dark me-2 rounded-pill">✏️ Editar</a>
+          <a href="{% url 'recetas:eliminar' receta.slug %}" class="btn btn-sm btn-outline-danger rounded-pill"
+             onclick="return confirm('¿Estás seguro de que deseas eliminar esta receta?');">
+             🗑️ Eliminar
+          </a>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="col-md-5">
+        {% if receta.imagen %}
+        <img src="{{ receta.imagen.url }}" alt="{{ receta.titulo }}" class="img-fluid rounded border" style="max-width: 100%; width: 100%; height: auto;">
+        {% else %}
+        <p class="text-muted">No hay imagen disponible.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Comentarios -->
+  <div class="card mt-5 shadow-sm p-4">
+    <h4 class="mb-3">🗨️ Comentarios</h4>
+
+    {% if comentarios %}
+      <div class="mb-4">
+        {% for comentario in comentarios %}
+          <div class="border rounded p-3 mb-3 bg-light">
+            <div class="mb-1">
+              <strong>{{ comentario.autor.username }}</strong> 
+              <small class="text-muted">| {{ comentario.creado|date:"d M Y H:i" }}</small>
+            </div>
+            <p class="mb-0">{{ comentario.contenido }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <p class="text-muted">No hay comentarios aún. ¡Sé el primero en comentar!</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <form method="post" class="mt-4">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ form.contenido.label_tag }}
+        {{ form.contenido }}
+      </div>
+      <button type="submit" class="btn btn-primary rounded-pill">💬 Comentar</button>
+    </form>
+    {% else %}
+      <div class="alert alert-info text-center mt-4" role="alert" style="font-size: 1rem;">
+        🍴 <strong>¿Te animas a comentar?</strong> 
+        <a href="{% url 'accounts:login' %}" class="alert-link">Inicia sesión</a> 
+        o 
+        <a href="{% url 'accounts:register' %}" class="alert-link">regístrate gratis</a> 
+        para ser parte de nuestra comunidad culinaria.
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

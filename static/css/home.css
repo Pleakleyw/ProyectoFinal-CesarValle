@@ -1,0 +1,112 @@
+.bienvenida {
+  animation: fadeInUp 1s ease-out;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-section {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.carousel-item {
+  position: relative;
+}
+
+.overlay-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.overlay-caption h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.overlay-caption small {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: #f8d17e;
+}
+
+.btn-receta {
+  background-color: #e6a83e;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-receta:hover {
+  background-color: #ca4117;
+  color: white;
+  transform: scale(1.05);
+}
+
+.btn-compartir {
+  background-color: #ff9800;
+  border: none;
+  font-weight: 600;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  color: white;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-compartir:hover {
+  background-color: #e68900;
+  color: white;
+}
+
+/* Flechas de carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 3;
+  width: 5%;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #ff9800;
+  border-radius: 50%;
+  background-size: 60% 60%;
+  padding: 12px;
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  background-color: #e68900;
+}
+
+.receta-destacada-label {
+  color: #ff9800;
+  font-weight: bold; 
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 90px;
+}
