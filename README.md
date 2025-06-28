@@ -6,31 +6,34 @@
 
 ## 🚀 Características principales
 
-- Registro e inicio de sesión de usuarios
-- CRUD completo de recetas (crear, editar, eliminar, listar)
-- Sistema de comentarios por receta
-- Filtros por categoría de receta
-- Paginación automática (12 recetas por página)
-- Carga de imágenes para cada receta
-- Slug generado automáticamente
-- Vista `/about/` con información del autor
-- Navegación dinámica con barra de menú
-- Seguridad por roles (solo el autor puede modificar su receta)
-- Interfaz responsive con Bootstrap 5
+- Registro e inicio de sesión de usuarios  
+- CRUD completo de recetas (crear, editar, eliminar, listar)  
+- Sistema de comentarios por receta  
+- Filtros por categoría de receta  
+- Paginación automática (12 recetas por página)  
+- Carga de imágenes para cada receta  
+- Slug generado automáticamente  
+- Vista `/about/` con información del autor  
+- Navegación dinámica con barra de menú  
+- Seguridad por roles:  
+  - Solo el autor puede modificar o eliminar su receta  
+  - El administrador (superuser) puede modificar o eliminar cualquier receta desde la web  
+- Interfaz responsive con Bootstrap 5  
 
 ---
 
 ## 🛠️ Tecnologías utilizadas
 
-- Python 3.11
-- Django 4.x
-- SQLite3 (modo desarrollo)
-- Bootstrap 5
-- CKEditor (texto enriquecido)
-- Widget Tweaks
-- FontAwesome & Bootstrap Icons
+- Python 3.11  
+- Django 4.x  
+- SQLite3 (modo desarrollo)  
+- Bootstrap 5  
+- CKEditor (texto enriquecido)  
+- Widget Tweaks  
+- FontAwesome & Bootstrap Icons  
 
 ---
+
 ## 📂 Estructura del proyecto
 
 ```bash

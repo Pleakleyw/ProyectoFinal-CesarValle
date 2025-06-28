@@ -14,7 +14,7 @@ class RecetaListView(ListView):
     template_name = 'recetas/receta_list.html'
     context_object_name = 'recetas'
     ordering = ['-creado']
-    paginate_by = 12  # ← Paginación: 12 recetas por página
+    paginate_by = 12
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -85,9 +85,14 @@ class RecetaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'recetas/receta_form.html'
     success_url = reverse_lazy('recetas:lista')
 
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Receta.objects.all()
+        return Receta.objects.filter(autor=self.request.user)
+
     def test_func(self):
         receta = self.get_object()
-        return self.request.user == receta.autor
+        return self.request.user == receta.autor or self.request.user.is_superuser
 
 
 class RecetaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -95,6 +100,11 @@ class RecetaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'recetas/receta_confirm_delete.html'
     success_url = reverse_lazy('recetas:lista')
 
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Receta.objects.all()
+        return Receta.objects.filter(autor=self.request.user)
+
     def test_func(self):
         receta = self.get_object()
-        return self.request.user == receta.autor
+        return self.request.user == receta.autor or self.request.user.is_superuser
