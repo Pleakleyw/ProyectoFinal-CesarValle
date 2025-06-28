@@ -47,7 +47,7 @@ Recetario/
 ├── manage.py
 ├── requirements.txt
 └── README.md
-
+```
 ## 👤 Autor
 
 - **Nombre:** Cesar Jordan Valle Yataco
