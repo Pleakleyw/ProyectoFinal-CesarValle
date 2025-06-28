@@ -56,7 +56,7 @@ Recetario/
 
 ## 🔑 Usuario demo
 
-Puedes ingresar como administrador con las siguientes credenciales para visualizar el contenido de la base de datos:
+Para efectos de prueba, puedes iniciar sesión como administrador utilizando las siguientes credenciales y visualizar los datos almacenados en la base de datos a través del panel web:
 
 - **Usuario:** `wanakin`  
 - **Contraseña:** `123456`
