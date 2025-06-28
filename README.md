@@ -56,7 +56,8 @@ Recetario/
 
 ## 🔑 Usuario demo
 
-Para efectos de prueba, puedes iniciar sesión como administrador utilizando las siguientes credenciales y visualizar los datos almacenados en la base de datos a través del panel web:
+Para efectos de prueba, puedes iniciar sesión como administrador utilizando las siguientes credenciales.
+Con este acceso podrás visualizar los datos almacenados en la base de datos desde la interfaz web, así como editar y eliminar cualquier receta directamente desde la plataforma:
 
 - **Usuario:** `wanakin`  
 - **Contraseña:** `123456`
